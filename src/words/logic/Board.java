@@ -20,7 +20,7 @@ public class Board {
 	}
 
 	//For testing purposes, draws board and words to the console
-	private void drawBoard() {
+	public void drawBoard() {
 		for(int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				System.out.print(board[i][j] + " ");
@@ -58,11 +58,13 @@ public class Board {
 		
 		//Direction returned as [xDir, yDir]
 		int[] moveXY = getDirection(direction);
+		System.out.println("New direction" + direction);
 		
 		//Find valid position, with attempts beginning at random starting point
 		int x = rnd.nextInt(SIZE);
 		int y = rnd.nextInt(SIZE);
 		boolean valid = false;
+		System.out.println("word " + index);
 		
 		for (int i = y; i < SIZE && !valid; i++) {
 			for (int j = x; j < SIZE && !valid; j++) {
@@ -123,15 +125,18 @@ public class Board {
 	private boolean checkValid(int xPos, int yPos, int[] direction, String word) {
 		for (int i = 0; i < word.length(); i++) {
 			if (xPos < 0 || xPos > 19 || yPos < 0 || yPos > 19) {
+				System.out.println(word + " out of bounds");
 				return false;
 			}
 			if (board[yPos][xPos] == 0 || board[yPos][xPos] == word.charAt(i)) {
 				xPos += direction[0];
 				yPos += direction[1];
 			} else {
+				System.out.println(word + " doesn't work here");
 				return false;
 			}
 		}
+		System.out.println(word + " valid");
 		return true;
 	}
 
