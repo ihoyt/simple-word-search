@@ -1,5 +1,6 @@
 package words.display;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -19,12 +20,11 @@ public class BoardDisplay extends JPanel {
 	}
 	
 	private void makeDisplay() {
-		int x = 0;
-		int y = 0;
-		
 		for(char[] i : board) {
 			for(char j : i) {
-				JLabel lbl = new JLabel(j + "");
+				JLabel lbl = new JLabel(" " + j + " ");
+				lbl.setFont(new Font("Helvetica", Font.BOLD, 20));
+				lbl.setVisible(true);
 				this.add(lbl);
 			}
 		}

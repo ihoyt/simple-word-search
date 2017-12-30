@@ -1,5 +1,7 @@
 package words.main;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 import words.display.BoardDisplay;
@@ -20,14 +22,16 @@ public class WordSearch extends JFrame implements Runnable {
 		super(NAME);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Board board = new Board(5);
+		Board board = new Board(2);
+		//this.setCursor(cursor);
 		//System.out.println("Here");
 		bd = new BoardDisplay(board.getBoard());
 		wordList = new WordListDisplay(board.getWordList());
 		gc = new GameControl(board.getBoard(), board.getWordPositions(), bd, wordList);
 		
-		this.getContentPane().add(bd);
-		this.getContentPane().add(wordList);
+		this.setLayout(new BorderLayout());
+		this.getContentPane().add(bd, BorderLayout.CENTER);
+		//this.getContentPane().add(wordList, BorderLayout.WEST);
 		this.pack();
 		
 	}
