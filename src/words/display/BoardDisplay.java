@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +22,7 @@ public class BoardDisplay extends JPanel {
 	
 	//Lines to highlight found words, stored as [numLines][4] with each line having {x1, y1, x2, y2}
 	private int[][] lines;
+	//Current user selection (if they've clicked and not released yet)
 	private int[] selectionLine;
 	
 	private GameControl gc;
@@ -58,7 +61,7 @@ public class BoardDisplay extends JPanel {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.30f));
 		
 		//Examples for drawing lines
-		/*
+		
 		int x1 = boardDisp[0][0].getX() + (boardDisp[0][0].getWidth()/2);
 		int y1 = boardDisp[0][0].getY() + (boardDisp[0][0].getHeight() / 2);
 		int x2 = boardDisp[0][6].getX() + (boardDisp[0][6].getWidth()/2);
@@ -71,7 +74,7 @@ public class BoardDisplay extends JPanel {
 		x2 = boardDisp[7][6].getX() + (boardDisp[7][6].getWidth()/2);
 		y2 = boardDisp[7][6].getY() + (boardDisp[7][6].getHeight() / 2);;
 		g2.setColor(Color.CYAN);
-		g2.drawLine(x1, y1, x2, y2);*/
+		g2.drawLine(x1, y1, x2, y2);
 	}
 	
 	public void addLine(int x1, int y1, int x2, int y2) {
@@ -84,5 +87,13 @@ public class BoardDisplay extends JPanel {
 	
 	public void addGameControl(GameControl gc) {
 		this.gc = gc;
+	}
+	
+	public void addMouseListener(MouseAdapter ma) {
+		super.addMouseListener(ma);
+	}
+	
+	public void addMouseMotionListener(MouseMotionAdapter ma) {
+		super.addMouseMotionListener(ma);
 	}
 }

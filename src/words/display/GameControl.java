@@ -1,6 +1,8 @@
 package words.display;
 
 import java.awt.Event;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionAdapter;
 
 public class GameControl {
 	private char[][] board;
@@ -13,9 +15,16 @@ public class GameControl {
 		this.wordsPos = wordsPos;
 		boardDisp = bd;
 		wordList = words;
+		addDispMouseListeners();
 	}
 	
-	public void notify(Event e) {
-		//TODO
+	private void addDispMouseListeners() {
+		boardDisp.addMouseListener(new MouseAdapter() {
+			//TODO
+		});
+		
+		boardDisp.addMouseMotionListener(new MouseMotionAdapter() {
+			//TODO
+		});
 	}
 }

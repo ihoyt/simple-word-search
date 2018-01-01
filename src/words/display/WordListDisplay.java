@@ -2,6 +2,7 @@ package words.display;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
@@ -19,7 +20,7 @@ public class WordListDisplay extends JPanel {
 		wordsDisp = new JLabel[words.length];
 		super.setLayout(new GridLayout(words.length, 1));
 		addWords();
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(150, 400));
 		setAlignmentX(JPanel.CENTER_ALIGNMENT);
 	}
@@ -27,6 +28,8 @@ public class WordListDisplay extends JPanel {
 	private void addWords() {
 		for (int i = 0; i < words.length; i++) {
 			wordsDisp[i] = new JLabel(words[i]);
+			wordsDisp[i].setForeground(Color.GREEN);
+			wordsDisp[i].setFont(new Font("Helvetica", Font.BOLD, 16));
 			wordsDisp[i].setVisible(true);
 			wordsDisp[i].setHorizontalAlignment(JLabel.CENTER);
 			this.add(wordsDisp[i]);
