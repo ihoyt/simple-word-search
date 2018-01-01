@@ -16,12 +16,14 @@ public class Board {
 		wordList = WordRandomizer.getWords(numWords);
 		wordStartEndPos = new int[numWords][4];
 		makeBoard(wordList);
-		int count = 0;
+		
+		//Print out words and start/end locations (for testing purposes)
+		/*int count = 0;
 		for (String s : wordList) {
 			System.out.println(s + " " + wordStartEndPos[count][0] + ", " + wordStartEndPos[count][1] + ", " 
 								+ wordStartEndPos[count][2] + ", " + wordStartEndPos[count][3]);
 			count++;
-		}
+		}*/
 		//drawBoard(); //For testing
 	}
 

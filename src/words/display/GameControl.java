@@ -1,5 +1,7 @@
 package words.display;
 
+import java.awt.Event;
+
 public class GameControl {
 	private char[][] board;
 	private int[][] wordsPos;
@@ -11,5 +13,9 @@ public class GameControl {
 		this.wordsPos = wordsPos;
 		boardDisp = bd;
 		wordList = words;
+	}
+	
+	public void notify(Event e) {
+		//TODO
 	}
 }
