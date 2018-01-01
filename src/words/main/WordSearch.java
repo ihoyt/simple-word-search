@@ -13,7 +13,7 @@ public class WordSearch extends JFrame implements Runnable {
 	
 	private static final long serialVersionUID = 1L;
 	public static final String NAME = "That Word Find Game";
-	public static final int NUM_WORDS = 20;
+	public static final int NUM_WORDS = 10;
 	
 	private BoardDisplay bd;
 	private GameControl gc;
