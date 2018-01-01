@@ -1,7 +1,13 @@
 package words.display;
 
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +17,10 @@ public class BoardDisplay extends JPanel {
 	
 	private char[][] board;
 	private JLabel[][] boardDisp;
+	//Lines to highlight found words, stored as [numLines][4] with each line having {x1, y1, x2, y2}
+	private int[][] lines;
+	
+	private Color[] colors = { Color.RED, Color.GREEN, Color.CYAN, Color.GRAY, Color.YELLOW, Color.MAGENTA };
 	
 	public BoardDisplay(char[][] board) {
 		this.board = board;
@@ -20,13 +30,39 @@ public class BoardDisplay extends JPanel {
 	}
 	
 	private void makeDisplay() {
-		for(char[] i : board) {
-			for(char j : i) {
-				JLabel lbl = new JLabel(" " + j + " ");
-				lbl.setFont(new Font("Helvetica", Font.BOLD, 20));
-				lbl.setVisible(true);
-				this.add(lbl);
+		boardDisp = new JLabel[board.length][board[0].length];
+		for(int i = 0; i < board.length; i++) {
+			for(int j = 0; j < board[0].length; j++) {
+				boardDisp[i][j] = new JLabel(" " + board[i][j] + " ");
+				boardDisp[i][j].setFont(new Font("Helvetica", Font.BOLD, 20));
+				boardDisp[i][j].setHorizontalAlignment(JLabel.CENTER);
+				boardDisp[i][j].setVisible(true);
+				this.add(boardDisp[i][j]);
 			}
 		}
+	}
+	
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		super.paint(g);
+		
+		g2.setStroke(new BasicStroke(15));
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.30f));
+		
+		//Example for drawing lines
+		/*int x1 = boardDisp[0][0].getX() + (boardDisp[0][0].getWidth()/2);
+		int y1 = boardDisp[0][0].getY() + (boardDisp[0][0].getHeight() / 2);
+		int x2 = boardDisp[0][6].getX() + (boardDisp[0][6].getWidth()/2);
+		int y2 = y1;
+		g2.setColor(Color.GREEN);
+		g2.drawLine(x1, y1, x2, y2);
+		
+		x1 = boardDisp[1][0].getX() + (boardDisp[1][0].getWidth()/2);
+		y1 = boardDisp[1][0].getY() + (boardDisp[1][0].getHeight() / 2);
+		x2 = boardDisp[7][6].getX() + (boardDisp[7][6].getWidth()/2);
+		y2 = boardDisp[7][6].getY() + (boardDisp[7][6].getHeight() / 2);;
+		g2.setColor(Color.CYAN);
+		g2.drawLine(x1, y1, x2, y2);*/
 	}
 }

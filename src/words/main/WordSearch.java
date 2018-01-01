@@ -22,9 +22,8 @@ public class WordSearch extends JFrame implements Runnable {
 		super(NAME);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Board board = new Board(2);
+		Board board = new Board(20);
 		//this.setCursor(cursor);
-		//System.out.println("Here");
 		bd = new BoardDisplay(board.getBoard());
 		wordList = new WordListDisplay(board.getWordList());
 		gc = new GameControl(board.getBoard(), board.getWordPositions(), bd, wordList);

@@ -16,6 +16,12 @@ public class Board {
 		wordList = WordRandomizer.getWords(numWords);
 		wordStartEndPos = new int[numWords][4];
 		makeBoard(wordList);
+		int count = 0;
+		for (String s : wordList) {
+			System.out.println(s + " " + wordStartEndPos[count][0] + ", " + wordStartEndPos[count][1] + ", " 
+								+ wordStartEndPos[count][2] + ", " + wordStartEndPos[count][3]);
+			count++;
+		}
 		//drawBoard(); //For testing
 	}
 
@@ -58,33 +64,34 @@ public class Board {
 		
 		//Direction returned as [xDir, yDir]
 		int[] moveXY = getDirection(direction);
-		System.out.println("New direction" + direction);
 		
 		//Find valid position, with attempts beginning at random starting point
 		int x = rnd.nextInt(SIZE);
 		int y = rnd.nextInt(SIZE);
 		boolean valid = false;
-		System.out.println("word " + index);
+		int timesLooped = 0;
 		
 		for (int i = y; i < SIZE && !valid; i++) {
-			for (int j = x; j < SIZE && !valid; j++) {
+			for (int j = 0; j < SIZE && !valid; j++) {
+				if (timesLooped == 0) {
+					j = x;
+				}
 				valid = checkValid(j, i, moveXY, word);
-				
 				if (valid) {
 					putWord(j, i, moveXY, word, index);
 					wordStartEndPos[index][0] = j;
 					wordStartEndPos[index][1] = i;
 					
-					//Loop back to beginning if end is reached (checks for x and y to catch the unlikely case of both starting at 0)
-				} else if ((i == SIZE - 1 && j == SIZE - 1) && (x != 0 && y != 0)) {
-					i = -1;
-					j = -1;
-					
-					//End loop if original starting point has been reached
-				} else if (i == x - 1 && j == y - 1) {
+				} else if (timesLooped == SIZE * SIZE) {
 					i = SIZE;
 					j = SIZE;
-				}
+					
+				//Loop back to beginning if end is reached (checks for x and y to catch the unlikely case of both starting at 0)
+				} else if ((i == SIZE - 1 && j == SIZE - 1) && (x != 0 && y != 0)) {
+					i = 0;
+					j = 0;
+				} 
+				timesLooped++;
 			}
 		}
 		
@@ -95,7 +102,7 @@ public class Board {
 			} else {
 				direction = 0;
 			}
-			placeWord(word, direction);
+			placeWord(word, index, direction);
 		}
 	}
 
@@ -125,18 +132,15 @@ public class Board {
 	private boolean checkValid(int xPos, int yPos, int[] direction, String word) {
 		for (int i = 0; i < word.length(); i++) {
 			if (xPos < 0 || xPos > 19 || yPos < 0 || yPos > 19) {
-				System.out.println(word + " out of bounds");
 				return false;
 			}
 			if (board[yPos][xPos] == 0 || board[yPos][xPos] == word.charAt(i)) {
 				xPos += direction[0];
 				yPos += direction[1];
 			} else {
-				System.out.println(word + " doesn't work here");
 				return false;
 			}
 		}
-		System.out.println(word + " valid");
 		return true;
 	}
 

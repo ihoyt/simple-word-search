@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
-public class WordRandomizer {
+public abstract class WordRandomizer {
 	public static final String DICT_PATH = "res/dict.txt";
 	
 	private static List<String> loadDict() {
@@ -40,5 +40,11 @@ public class WordRandomizer {
 		}
 		
 		return words;
+	}
+	
+	public static String getWord() {
+		List<String> dict = loadDict();
+		Random rnd = new Random();
+		return dict.get(rnd.nextInt(dict.size())).toUpperCase();
 	}
 }
