@@ -23,6 +23,23 @@ public class WordSearch extends JFrame implements Runnable {
 		super(NAME);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		makeNewGame();
+		this.setLocationRelativeTo(null);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	}
+	
+	@Override
+	public void run() {
+		while(!gc.gameOver()) {
+			this.setVisible(true);
+		}
+		if (gc.gameOver()) {
+			this.removeAll();
+			//TODO
+		}
+	}
+
+	private void makeNewGame() {
 		Board board = new Board(NUM_WORDS);
 		
 		bd = new BoardDisplay(board.getBoard(), board.getWordList().length);
@@ -33,18 +50,6 @@ public class WordSearch extends JFrame implements Runnable {
 		this.setLayout(new BorderLayout());
 		this.getContentPane().add(bd, BorderLayout.CENTER);
 		this.getContentPane().add(wordList, BorderLayout.WEST);
-		
 		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 	}
-	
-	@Override
-	public void run() {
-		boolean running = true;
-		while(running) {
-			this.setVisible(true);
-		}
-	}
-
 }

@@ -14,6 +14,8 @@ public class GameControl {
 	
 	private int wordsFound = 0;
 	
+	private boolean gameOver = false;
+	
 	public GameControl(char[][] board, int[][]wordsPos, BoardDisplay bd, WordListDisplay words) {
 		this.board = board;
 		this.wordsPos = wordsPos;
@@ -64,6 +66,11 @@ public class GameControl {
 	private void checkWin() {
 		if(wordsFound == wordsPos.length) {
 			boardDisp.win();
+			gameOver = true;
 		}
+	}
+	
+	public boolean gameOver() {
+		return gameOver;
 	}
 }

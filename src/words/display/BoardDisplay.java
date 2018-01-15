@@ -2,6 +2,7 @@ package words.display;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -78,17 +79,20 @@ public class BoardDisplay extends JPanel {
 		g2.setStroke(new BasicStroke(15));
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
 		
-		for(int[] line : lines) {
-			if (line[0] != line[2] || line[1] != line[3]) {
-				int x1 = boardDisp[line[1]][line[0]].getX() + (boardDisp[line[1]][line[0]].getWidth()/2);
-				int y1 = boardDisp[line[1]][line[0]].getY() + (boardDisp[line[1]][line[0]].getHeight()/2);
-				int x2 = boardDisp[line[3]][line[2]].getX() + (boardDisp[line[3]][line[2]].getWidth()/2);
-				int y2 = boardDisp[line[3]][line[2]].getY() + (boardDisp[line[3]][line[2]].getHeight()/2);
-				
-				g2.setColor(colors[colorIndex++ % colors.length]);
-				g2.drawLine(x1, y1, x2, y2);
+		if (lines != null) {
+			for(int[] line : lines) {
+				if (line[0] != line[2] || line[1] != line[3]) {
+					int x1 = boardDisp[line[1]][line[0]].getX() + (boardDisp[line[1]][line[0]].getWidth()/2);
+					int y1 = boardDisp[line[1]][line[0]].getY() + (boardDisp[line[1]][line[0]].getHeight()/2);
+					int x2 = boardDisp[line[3]][line[2]].getX() + (boardDisp[line[3]][line[2]].getWidth()/2);
+					int y2 = boardDisp[line[3]][line[2]].getY() + (boardDisp[line[3]][line[2]].getHeight()/2);
+					
+					g2.setColor(colors[colorIndex++ % colors.length]);
+					g2.drawLine(x1, y1, x2, y2);
+				}
 			}
 		}
+		
 		//Draw selection line if user hasClicked
 		if (hasClicked) {
 			int x1 = boardDisp[selectionLine[1]][selectionLine[0]].getX() + (boardDisp[selectionLine[1]][selectionLine[0]].getWidth()/2);
@@ -134,6 +138,9 @@ public class BoardDisplay extends JPanel {
 	}
 	
 	public void win() {
-		//TODO
+		this.removeAll();
+		lines = null;
+		this.setLayout(new BorderLayout());
+		this.add(new JLabel("Good job!"), BorderLayout.CENTER);
 	}
 }
