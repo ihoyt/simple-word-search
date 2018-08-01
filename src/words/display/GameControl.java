@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GameControl {
+	@SuppressWarnings("unused")
 	private char[][] board;
 	private int[][] wordsPos;
 	private BoardDisplay boardDisp;
@@ -21,7 +22,7 @@ public class GameControl {
 		this.wordsPos = wordsPos;
 		boardDisp = bd;
 		wordList = words;
-		firstSelection = new int[2];
+		firstSelection = new int[2]; // stored as [x ,y]
 		addDispMouseListeners();
 	}
 	

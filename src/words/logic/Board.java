@@ -99,7 +99,7 @@ public class Board {
 		
 		//Repeat the process with a different attempted direction if the word was not successfully placed
 		if (!valid) {
-			if (direction < 7) {
+			if (direction < 7) { // 8 possible directions to choose from
 				direction++;
 			} else {
 				direction = 0;
@@ -133,7 +133,7 @@ public class Board {
 	//Checks to see if word position is valid
 	private boolean checkValid(int xPos, int yPos, int[] direction, String word) {
 		for (int i = 0; i < word.length(); i++) {
-			if (xPos < 0 || xPos > 19 || yPos < 0 || yPos > 19) {
+			if (xPos < 0 || xPos > SIZE - 1 || yPos < 0 || yPos > SIZE - 1) {
 				return false;
 			}
 			if (board[yPos][xPos] == 0 || board[yPos][xPos] == word.charAt(i)) {
